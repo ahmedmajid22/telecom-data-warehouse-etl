@@ -1,0 +1,1 @@
+CREATE DATABASE telecom_db;
