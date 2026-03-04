@@ -27,16 +27,12 @@ def read_csv_file(file_path: str, required_columns: list):
         df = pd.read_csv(file_path)
 
         # Validate required columns
-        missing_columns = [
-            col for col in required_columns if col not in df.columns
-        ]
+        missing_columns = [col for col in required_columns if col not in df.columns]
 
         if missing_columns:
             raise ValueError(f"Missing columns: {missing_columns}")
 
-        logger.info(
-            f"Successfully loaded {file_path} with {len(df)} rows"
-        )
+        logger.info(f"Successfully loaded {file_path} with {len(df)} rows")
 
         return df
 

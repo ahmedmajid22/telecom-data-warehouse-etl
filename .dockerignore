@@ -1,8 +1,25 @@
+# Python bytecode
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
 
+# Local environments
+venv/
+.env
+.venv
+env/
+
+# IDE and OS files
+.vscode/
+.idea/
 .DS_Store
+Thumbs.db
+
+
+.pytest_cache/
+.coverage
+htmlcov/
 
 logs/
+*.log

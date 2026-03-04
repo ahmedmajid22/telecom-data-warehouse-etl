@@ -72,50 +72,54 @@ def build_dim_date(start="2024-01-01", end="2027-12-31") -> pd.DataFrame:
     """Generates a dimension table for dates to support time-based analytics."""
     logging.info(f"Building dim_date from {start} to {end}")
     date_range = pd.date_range(start=start, end=end)
-    dim_date = pd.DataFrame({
-        "date_id": date_range,
-        "day": date_range.day,
-        "month": date_range.month,
-        "year": date_range.year,
-        "quarter": date_range.quarter,
-        "week": date_range.isocalendar().week,
-        "day_name": date_range.day_name(),
-        "month_name": date_range.month_name(),
-        "is_weekend": date_range.weekday >= 5
-    })
+    dim_date = pd.DataFrame(
+        {
+            "date_id": date_range,
+            "day": date_range.day,
+            "month": date_range.month,
+            "year": date_range.year,
+            "quarter": date_range.quarter,
+            "week": date_range.isocalendar().week,
+            "day_name": date_range.day_name(),
+            "month_name": date_range.month_name(),
+            "is_weekend": date_range.weekday >= 5,
+        }
+    )
     # Ensure date_id is explicitly a date object for proper SQL loading
     dim_date["date_id"] = dim_date["date_id"].dt.date
     return dim_date
 
 
-def build_fact_table(transactions_df: pd.DataFrame, sim_df: pd.DataFrame) -> pd.DataFrame:
+def build_fact_table(
+    transactions_df: pd.DataFrame, sim_df: pd.DataFrame
+) -> pd.DataFrame:
     """
     Joins transactions with dimensions to create the Fact table.
     This links transaction events to specific customers and SIM IDs.
     """
-    logging.info(
-        "Building fact_transactions by joining SIM and Transaction data")
+    logging.info("Building fact_transactions by joining SIM and Transaction data")
 
     # Ensure datetime format for merging and safe date handling
     transactions_df["transaction_date"] = pd.to_datetime(
-        transactions_df["transaction_date"])
+        transactions_df["transaction_date"]
+    )
 
     # Join transactions with sim_cards to get the customer_id associated with that SIM
     fact = transactions_df.merge(
-        sim_df[["sim_id", "customer_id"]],
-        on="sim_id",
-        how="left"
+        sim_df[["sim_id", "customer_id"]], on="sim_id", how="left"
     )
 
     # Create date_id as a date object to match the dim_date Primary Key
     fact["date_id"] = fact["transaction_date"].dt.date
 
     # Select and order columns to match the SQL schema exactly
-    return fact[[
-        "transaction_id",
-        "sim_id",
-        "customer_id",
-        "date_id",
-        "amount",
-        "store_location"
-    ]]
+    return fact[
+        [
+            "transaction_id",
+            "sim_id",
+            "customer_id",
+            "date_id",
+            "amount",
+            "store_location",
+        ]
+    ]
