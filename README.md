@@ -26,23 +26,26 @@ Production-ready Python ETL pipeline designed for a telecom data warehouse, full
 
 Here is a visual overview of the project structure, ETL pipeline, and data warehouse star schema:
 
-<p align="center">
-  <img src="images/1.png" alt="Project Structure" width="500"/>
-  <br>
-  <em>Project folder and file structure</em>
-</p>
-
-<p align="center">
-  <img src="images/2.png" alt="ETL Pipeline" width="500"/>
-  <br>
-  <em>ETL Pipeline Flow: Extract → Transform → Load</em>
-</p>
-
-<p align="center">
-  <img src="images/3.png" alt="Star Schema" width="500"/>
-  <br>
-  <em>Star Schema Data Warehouse: Fact and Dimension Tables</em>
-</p>
+<div align="center">
+  <table>
+    <tr>
+      <td align="center">
+        <img src="images/1.png" alt="Project Structure" width="300"/><br>
+        <em>Project folder and file structure</em>
+      </td>
+      <td align="center">
+        <img src="images/2.png" alt="ETL Pipeline" width="300"/><br>
+        <em>ETL Pipeline Flow: Extract → Transform → Load</em>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center">
+        <img src="images/3.png" alt="Star Schema" width="500"/><br>
+        <em>Star Schema Data Warehouse: Fact and Dimension Tables</em>
+      </td>
+    </tr>
+  </table>
+</div>
 
 ---
 
@@ -77,8 +80,4 @@ docker-compose exec airflow airflow webserver
 docker-compose exec airflow airflow scheduler
 
 # Run tests
-<<<<<<< HEAD
 pytest tests/
-=======
-pytest tests/
->>>>>>> 7ee4e570bc07bc2ab396954db6f4061180d51b9e
