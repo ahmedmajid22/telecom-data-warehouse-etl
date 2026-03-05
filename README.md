@@ -77,4 +77,8 @@ docker-compose exec airflow airflow webserver
 docker-compose exec airflow airflow scheduler
 
 # Run tests
+<<<<<<< HEAD
 pytest tests/
+=======
+pytest tests/
+>>>>>>> 7ee4e570bc07bc2ab396954db6f4061180d51b9e
