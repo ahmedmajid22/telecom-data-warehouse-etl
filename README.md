@@ -22,26 +22,36 @@ Production-ready Python ETL pipeline designed for a telecom data warehouse, full
 
 ---
 
-## Project Structure & Visual Overview
 
-Here is a visual overview of the project structure, ETL pipeline, and data warehouse star schema:
+
+## Project Structure & Visual Overview
 
 <div align="center">
   <table>
     <tr>
       <td align="center">
-        <img src="images/1.png" alt="Project Structure" width="300"/><br>
-        <em>Project folder and file structure</em>
+        <img src="images/airflow_dag_overview.png" alt="Airflow DAG Overview" width="300"/><br>
+        <em>Airflow DAG overview and project folder structure</em>
       </td>
       <td align="center">
-        <img src="images/2.png" alt="ETL Pipeline" width="300"/><br>
-        <em>ETL Pipeline Flow: Extract → Transform → Load</em>
+        <img src="images/airflow_dag_run_success.png" alt="Airflow DAG Run Success" width="300"/><br>
+        <em>ETL Pipeline Flow: Extract → Transform → Load (Successful Run)</em>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        <img src="images/db_row_count.png" alt="Fact Transactions Row Count" width="300"/><br>
+        <em>Fact Table Row Count: Ensures ETL loaded data</em>
+      </td>
+      <td align="center">
+        <img src="images/db_fact_transactions_preview.png" alt="Fact Transactions Preview" width="300"/><br>
+        <em>Preview of `fact_transactions` data</em>
       </td>
     </tr>
     <tr>
       <td colspan="2" align="center">
-        <img src="images/3.png" alt="Star Schema" width="500"/><br>
-        <em>Star Schema Data Warehouse: Fact and Dimension Tables</em>
+        <img src="images/db_revenue_by_city.png" alt="Revenue by City" width="500"/><br>
+        <em>Analytics Example: Revenue by City</em>
       </td>
     </tr>
   </table>
@@ -49,9 +59,17 @@ Here is a visual overview of the project structure, ETL pipeline, and data wareh
 
 ---
 
+## Platform Architecture Overview
+
+<div align="center">
+  <img src="images/platform-architecture-overview.png.png" alt="Platform Architecture Overview" width="600"/><br>
+  <em>High-level architecture of the Telecom Data Warehouse ETL pipeline</em>
+</div>
+
+---
 ## Outcome
 
-A fully functional, professional-grade telecom data pipeline ready for production and scalable analytics. Perfect showcase for a **data engineer role**.
+A fully functional, professional-grade telecom data pipeline ready for production and scalable analytics. Perfect showcase for a **Data Engineer portfolio**.
 
 ---
 
@@ -70,14 +88,18 @@ A fully functional, professional-grade telecom data pipeline ready for productio
 ## How to Run
 
 ```bash
-# Build and start Docker containers
+# 1️⃣ Clone the repository
+git clone https://github.com/ahmedmajid22/telecom-data-warehouse-etl.git
+cd telecom-data-warehouse-etl
+
+# 2️⃣ Build and start Docker containers
 docker-compose up --build
 
-# Run Airflow webserver
+# 3️⃣ Run Airflow webserver
 docker-compose exec airflow airflow webserver
 
-# Run Airflow scheduler
+# 4️⃣ Run Airflow scheduler
 docker-compose exec airflow airflow scheduler
 
-# Run tests
+# 5️⃣ Run tests
 pytest tests/
